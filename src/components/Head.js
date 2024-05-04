@@ -2,9 +2,40 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { useEffect, useState } from "react";
+import { YOUTUBE_SEARCH_API } from "../utils/constants";
 
 const Head = () => {
   const dispatch=useDispatch();
+  const [searchQuery,setSearchQuery]=useState("");
+  // console.log(searchQuery);
+
+  const getSearchSuggestions = async() =>{
+    console.log("Api Call - " + searchQuery);
+    const data=await fetch(`http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=${searchQuery}`)
+    // const json=await data.json();
+    console.log(data);
+
+    // console.log(json?. .google.ac.h[1]);
+  }
+
+  useEffect(()=>{
+    //API Call
+
+    //Make an api call after every keypress
+    //but if the difference between 2 API calls is <200ms
+    //then decline the api call
+    const timer=setTimeout(()=>getSearchSuggestions(),3000);
+
+    
+    return ()=>{
+      clearTimeout(timer);
+    }
+
+
+  },[searchQuery])
+
+  
 
   const toggleMenuHandler=()=>{
     dispatch(toggleMenu());
@@ -27,6 +58,8 @@ const Head = () => {
           className="w-1/2 border border-gray-400 px-4 py-2 rounded-l-full"
           type="text"
           placeholder="Search"
+          value={searchQuery}
+          onChange={(e)=>setSearchQuery(e.target.value)}
         />
         <button className="border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100">
           Search
