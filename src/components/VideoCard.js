@@ -7,7 +7,7 @@ const VideoCard = ({info}) => {
     const {channelTitle,title,thumbnails,publishedAt}=snippet;
 
     const timeElapsed=timeAgo(publishedAt);
-    const convertedViews=convertViews(statistics.viewCount);
+    const convertedViews=convertViews(statistics?.viewCount);
     
 
      
