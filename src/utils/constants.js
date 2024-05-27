@@ -6,6 +6,7 @@ export const YOUTUBE_VIDEOS_API =
 
 export const YOUTUBE_SEARCH_API="http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q="
 
+export const OFFSET_LIVE_CHAT=300;
 
 export const timeAgo = (timestamp) => {
   const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
